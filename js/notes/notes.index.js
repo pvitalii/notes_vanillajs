@@ -32,7 +32,7 @@ const createForm = document.querySelector('.create-note-form');
 const editForm = document.querySelector('.edit-note-form');
 
 createForm.addEventListener('submit', submitNoteCreation);
-editForm.addEventListener('submit', (event) => submitNoteEdition(editForm.id, event));
+editForm.addEventListener('submit', (event) => submitNoteEdition(editForm.dataset.noteId, event));
 
 function addListenersOnNotes() {
   const editNoteBtn = document.querySelectorAll('.edit-note-btn');
@@ -42,22 +42,22 @@ function addListenersOnNotes() {
 
   editNoteBtn.forEach((editBtn) => {
     editBtn.addEventListener('click', (event) => {
-      const id = event.currentTarget.id;
+      const id = event.currentTarget.dataset.noteId;
       openEditModal(notesService.findNoteById(id));
-      editForm.id = id;
+      editForm.dataset.noteId = id;
     });
   })
 
   archiveNoteBtn.forEach((archiveBtn) => {
     archiveBtn.addEventListener('click', (event) => {
-      const noteId = event.currentTarget.id;
+      const noteId = event.currentTarget.dataset.noteId;
       archiveNote(notesService.findNoteById(noteId));
     });
   })
 
   deleteNoteBtn.forEach((deleteBtn) => {
     deleteBtn.addEventListener('click', (event) => {
-      deleteNote(event.currentTarget.id);
+      deleteNote(event.currentTarget.dataset.noteId);
     })
   })
 }

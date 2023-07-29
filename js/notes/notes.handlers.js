@@ -57,9 +57,9 @@ export function renderNotes(noteTable, isArchived) {
       <td>${note.dates}</td>
       <td>
         <div class="icon-row">
-          <button style="display: ${isArchived ? "none" : "block"}" id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
-          <button id="${note.id}" class="icon-btn archive-note-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
-          <button id="${note.id}" class="icon-btn delete-note-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
+          <button style="display: ${isArchived ? "none" : "block"}" data-note-id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
+          <button data-note-id="${note.id}" class="icon-btn archive-note-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
+          <button data-note-id="${note.id}" class="icon-btn delete-note-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
         </div>
       </td>`
     return tableRow
