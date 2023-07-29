@@ -26,6 +26,7 @@ export function submitNoteCreation(event) {
 function addListenersOnNotes() {
   const editNoteBtn = document.querySelectorAll('.edit-note-btn');
   const archiveNoteBtn = document.querySelectorAll('.archive-note-btn');
+  const deleteNoteBtn = document.querySelectorAll('.delete-note-btn');
   const editForm = document.querySelector('.edit-note-form');
 
   editNoteBtn.forEach((editBtn) => {
@@ -41,6 +42,13 @@ function addListenersOnNotes() {
       const noteId = +event.target.parentNode.id;
       archiveNote(notesService.findNoteById(noteId));
     });
+  })
+
+  deleteNoteBtn.forEach((deleteBtn) => {
+    deleteBtn.addEventListener('click', (event) => {
+      const noteId = +event.target.parentNode.id;
+      deleteNote(notesService.findNoteById(noteId));
+    })
   })
 }
 
@@ -65,9 +73,17 @@ export function archiveNote(note) {
   }
 }
 
+export function deleteNote(note) {
+  notesService.deleteNote(note.id)
+  if(note.archived) {
+    archivedTable.dispatchEvent(editNotesEvent);
+  } else {
+    noteTable.dispatchEvent(editNotesEvent);
+  }
+}
+
 export function renderNotes(noteTable, isArchived) {
   const notes = notesService.getNotes();
-  console.log(notes)
   const tableHeader = noteTable.querySelector('.table-header');
   const rows = notes.map((note) => {
     if(note.archived !== isArchived) return '';
@@ -82,7 +98,7 @@ export function renderNotes(noteTable, isArchived) {
         <div class="icon-row">
           <button style="display: ${isArchived ? "none" : "block"}" id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
           <button id="${note.id}" class="icon-btn archive-note-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
-          <button id="${note.id}" class="icon-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
+          <button id="${note.id}" class="icon-btn delete-note-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
         </div>
       </td>`
     return tableRow
