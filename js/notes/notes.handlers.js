@@ -6,6 +6,7 @@ import { NotesService } from "./notes.service.js";
 const notesService = new NotesService();
 
 const noteTable = document.querySelector('.note-table');
+const archivedTable = document.querySelector('.archived-table');
 
 export function submitNoteCreation(event) {
   event.preventDefault();
@@ -37,7 +38,8 @@ function addListenersOnNotes() {
 
   archiveNoteBtn.forEach((archiveBtn) => {
     archiveBtn.addEventListener('click', (event) => {
-      archiveNote(+event.target.parentNode.id);
+      const noteId = +event.target.parentNode.id;
+      archiveNote(notesService.findNoteById(noteId));
     });
   })
 }
@@ -53,16 +55,22 @@ export function submitNoteEdition(id, event) {
   noteTable.dispatchEvent(editNotesEvent);
 }
 
-export function archiveNote(id) {
-  notesService.editNote(id, {archived: true});
-  noteTable.dispatchEvent(editNotesEvent);
+export function archiveNote(note) {
+  notesService.editNote(note.id, {archived: !note.archived});
+  if(note.archived) {
+    noteTable.dispatchEvent(editNotesEvent);
+    archivedTable.dispatchEvent(editNotesEvent);
+  } else {
+    noteTable.dispatchEvent(editNotesEvent);
+  }
 }
 
-export function renderNotes() {
+export function renderNotes(noteTable, isArchived) {
   const notes = notesService.getNotes();
-  const tableHeader = noteTable.querySelector('.table-header')
+  console.log(notes)
+  const tableHeader = noteTable.querySelector('.table-header');
   const rows = notes.map((note) => {
-    if(note.archived) return '';
+    if(note.archived !== isArchived) return '';
     const tableRow = document.createElement('tr');
     tableRow.innerHTML = `
       <td class="name-row"><img src="img/${note.category.replaceAll(/ /ig, '_')}.svg"/>${note.name}</td>
@@ -72,7 +80,7 @@ export function renderNotes() {
       <td>${note.dates}</td>
       <td>
         <div class="icon-row">
-          <button id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
+          <button style="display: ${isArchived ? "none" : "block"}" id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
           <button id="${note.id}" class="icon-btn archive-note-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
           <button id="${note.id}" class="icon-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
         </div>

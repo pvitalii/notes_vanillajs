@@ -20,7 +20,10 @@
             <th class="icon-row"><img src="./img/white_archive.svg" alt=""> <img src="./img/white_delete.svg" alt=""></th>
           </tr>
         </table>
-        <button class="create-note-btn">Create Note</button>
+        <div class="table-btn">
+          <button class="archived-btn">Archived Notes</button>
+          <button class="create-note-btn">Create Note</button>
+        </div>
         <div class="create-modal modal">
           <div class="modal-content">
             <span class="close">&times;</span>
@@ -50,6 +53,22 @@
               <input type="text" placeholder="Content" name="content" class="edit-content-input">
               <button type="submit" class="submit-edit-btn">Edit Note</button>
             </form>
+          </div>
+        </div>
+
+        <div class="archived-modal modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <table class="archived-table">
+              <tr class="table-header">
+                <th>Name</th>
+                <th>Created</th>
+                <th>Category</th>
+                <th>Content</th>
+                <th>Dates</th>
+                <th class="icon-row"><img src="./img/white_archive.svg" alt=""> <img src="./img/white_delete.svg" alt=""></th>
+              </tr>
+            </table>
           </div>
         </div>
     </div>

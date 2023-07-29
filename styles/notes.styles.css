@@ -21,9 +21,10 @@
   margin: 0 auto;
 }
 
-.create-note-btn {
-  display: block;
-  margin: 1rem 0 0 auto;
+.table-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .modal {
