@@ -31,7 +31,7 @@ function addListenersOnNotes() {
 
   editNoteBtn.forEach((editBtn) => {
     editBtn.addEventListener('click', (event) => {
-      const id = +event.target.parentNode.id;
+      const id = +event.currentTarget.id;
       openEditModal(notesService.findNoteById(id));
       editForm.id = id;
     });
@@ -39,14 +39,14 @@ function addListenersOnNotes() {
 
   archiveNoteBtn.forEach((archiveBtn) => {
     archiveBtn.addEventListener('click', (event) => {
-      const noteId = +event.target.parentNode.id;
+      const noteId = +event.currentTarget.id;
       archiveNote(notesService.findNoteById(noteId));
     });
   })
 
   deleteNoteBtn.forEach((deleteBtn) => {
     deleteBtn.addEventListener('click', (event) => {
-      const noteId = +event.target.parentNode.id;
+      const noteId = +event.currentTarget.id;
       deleteNote(notesService.findNoteById(noteId));
     })
   })
