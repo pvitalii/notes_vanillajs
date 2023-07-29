@@ -1,8 +1,7 @@
-const createModal = document.querySelector('.create-modal');
 const editModal = document.querySelector('.edit-modal');
 
-export function openCreateModal () {
-  createModal.style.display = "block";
+export function openModal (modal) {
+  modal.style.display = "block";
 }
 
 function populateOldValues(note) {

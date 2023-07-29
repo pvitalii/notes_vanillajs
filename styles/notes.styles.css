@@ -1,9 +1,9 @@
-.table-header {
+.table-header, .stat-header {
   background-color: #999999;
   color: white;
 }
 
-.note-table {
+.note-table, .stat-table, .archived-table {
   text-align: center;
 }
 
@@ -19,46 +19,36 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  gap: 3rem;
 }
 
-.create-note-btn {
-  display: block;
-  margin: 1rem 0 0 auto;
+.table-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .modal {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: rgb(0, 0, 0);
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-  /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
 .close {
   color: #aaa;
   float: right;
@@ -97,4 +87,19 @@
   cursor: pointer;
   background: none;
   border: none;
+}
+
+.note-table td {
+  max-width: 600px;
+}
+
+.archived-table td {
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archived-content {
+  width: 70%;
 }
