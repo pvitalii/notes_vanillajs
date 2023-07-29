@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button {
+  padding: 0.5rem 0.25rem;
+}
+
+/* Загальні стилі для заголовків */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Стилі для посилань */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Стилі для списків */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Стилі для зображень */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Стилі для таблиць */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ccc;
+  padding: 8px;
+}

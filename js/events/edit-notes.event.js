@@ -1,0 +1,1 @@
+export const editNotesEvent = new Event("edit-notes");

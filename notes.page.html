@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/notes.styles.css">
+  <title>NotesApp</title>
+</head>
+<body>
+  <div class="container">
+    <div class="table-wrapper">
+        <table class="note-table">
+          <tr class="table-header">
+            <th>Name</th>
+            <th>Created</th>
+            <th>Category</th>
+            <th>Content</th>
+            <th>Dates</th>
+            <th class="icon-row"><img src="./img/white_archive.svg" alt=""> <img src="./img/white_delete.svg" alt=""></th>
+          </tr>
+        </table>
+        <button class="create-note-btn">Create Note</button>
+        <div class="create-modal modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="" class="create-note-form action-form">
+              <input type="text" placeholder="Name" name="name">
+              <select name="category">
+                <option value="Task">Task</option>
+                <option value="Random Thought">Random Thought</option>
+                <option value="Idea">Idea</option>
+              </select>
+              <input type="text" placeholder="Content" name="content">
+              <button type="submit" class="submit-create-btn">Create Note</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="edit-modal modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="" class="edit-note-form action-form">
+              <input type="text" placeholder="Name" name="name" class="edit-name-input">
+              <select name="category" class="edit-category-select">
+                <option id="Task" value="Task">Task</option>
+                <option id="Random Thought" value="Random Thought">Random Thought</option>
+                <option id="Idea" value="Idea">Idea</option>
+              </select>
+              <input type="text" placeholder="Content" name="content" class="edit-content-input">
+              <button type="submit" class="submit-edit-btn">Edit Note</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script type="module" src="./js/notes/notes.index.js"></script>
+</body>
+</html>
