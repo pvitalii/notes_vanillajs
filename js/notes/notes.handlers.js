@@ -50,7 +50,7 @@ export function renderNotes(noteTable, isArchived) {
     if(note.archived !== isArchived) return '';
     const tableRow = document.createElement('tr');
     tableRow.innerHTML = `
-      <td class="name-row"><img src="img/${note.category.replaceAll(/ /ig, '_')}.svg"/>${note.name}</td>
+      <td><div class="name-row"><img src="img/${note.category.replaceAll(/ /ig, '_')}.svg"/>${note.name}</div></td>
       <td>${note.created.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
       <td>${note.category}</td>
       <td>${note.content}</td>

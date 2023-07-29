@@ -102,15 +102,16 @@
 }
 
 .note-table td {
-  white-space: nowrap;
-  max-width: 400px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 600px;
 }
 
 .archived-table td {
   white-space: nowrap;
-  max-width: 210px;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.archived-content {
+  width: 70%;
 }
