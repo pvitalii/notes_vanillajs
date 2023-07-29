@@ -7,6 +7,7 @@ const notesService = new NotesService();
 
 const noteTable = document.querySelector('.note-table');
 const archivedTable = document.querySelector('.archived-table');
+const statTable = document.querySelector('.stat-table')
 
 export function submitNoteCreation(event) {
   event.preventDefault();
@@ -107,4 +108,21 @@ export function renderNotes(noteTable, isArchived) {
   if(noteTable.children.length > 1) {
     addListenersOnNotes();
   }
+}
+
+export function renderStat() {
+  const tableHeader = statTable.querySelector('.stat-header');
+  const notes = notesService.getNotes();
+  const statInfo = notes.map((note) => { return { category: note.category, archived: note.archived }});
+  const allCategories = ['Task', 'Random Thought', 'Idea'];
+  const rows = allCategories.map((category) => {
+    const tableRow = document.createElement('tr');
+    tableRow.innerHTML = `
+      <td class="name-row"><img src="img/${category.replaceAll(/ /ig, '_')}.svg"/>${category}</td>
+      <td>${statInfo.filter((info) => info.category === category && !info.archived).length}</td>
+      <td>${statInfo.filter((info) => info.category === category && info.archived).length}</td>
+    `
+    return tableRow;
+  })
+  statTable.replaceChildren(tableHeader, ...rows);
 }

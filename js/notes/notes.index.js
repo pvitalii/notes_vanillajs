@@ -1,11 +1,19 @@
 import { closeModalOnBtn, openModal } from "../common/modal.handlers.js";
-import { renderNotes, submitNoteCreation, submitNoteEdition } from "./notes.handlers.js";
+import { editNotesEvent } from "../events/edit-notes.event.js";
+import { renderNotes, submitNoteCreation, submitNoteEdition, renderStat } from "./notes.handlers.js";
 
 const noteTable = document.querySelector('.note-table');
 const archivedTable = document.querySelector('.archived-table');
 
-noteTable.addEventListener('edit-notes', () => renderNotes(noteTable, false));
-archivedTable.addEventListener('edit-notes', () => renderNotes(archivedTable, true));
+noteTable.addEventListener('edit-notes', () => { 
+  renderStat(); 
+  renderNotes(noteTable, false);
+});
+archivedTable.addEventListener('edit-notes', () => {
+  renderStat();
+  renderNotes(archivedTable, true);
+});
+noteTable.dispatchEvent(editNotesEvent);
 
 const createNoteBtn = document.querySelector('.create-note-btn');
 const closeBtn = document.querySelectorAll(".close");
