@@ -16,13 +16,15 @@ export function submitNoteCreation(event) {
       ...formProps,
       id: new Date().getTime(),
       created: new Date(),
-      dates: dateParse(formProps.content)?.join(', ') ?? ' '
+      dates: dateParse(formProps.content)?.join(', ') ?? ' ',
+      archived: false
     });
   noteTable.dispatchEvent(editNotesEvent);
 }
 
 function addListenersOnNotes() {
   const editNoteBtn = document.querySelectorAll('.edit-note-btn');
+  const archiveNoteBtn = document.querySelectorAll('.archive-note-btn');
   const editForm = document.querySelector('.edit-note-form');
 
   editNoteBtn.forEach((editBtn) => {
@@ -30,6 +32,12 @@ function addListenersOnNotes() {
       const id = +event.target.parentNode.id;
       openEditModal(notesService.findNoteById(id));
       editForm.id = id;
+    });
+  })
+
+  archiveNoteBtn.forEach((archiveBtn) => {
+    archiveBtn.addEventListener('click', (event) => {
+      archiveNote(+event.target.parentNode.id);
     });
   })
 }
@@ -45,10 +53,16 @@ export function submitNoteEdition(id, event) {
   noteTable.dispatchEvent(editNotesEvent);
 }
 
+export function archiveNote(id) {
+  notesService.editNote(id, {archived: true});
+  noteTable.dispatchEvent(editNotesEvent);
+}
+
 export function renderNotes() {
   const notes = notesService.getNotes();
   const tableHeader = noteTable.querySelector('.table-header')
   const rows = notes.map((note) => {
+    if(note.archived) return '';
     const tableRow = document.createElement('tr');
     tableRow.innerHTML = `
       <td class="name-row"><img src="img/${note.category.replaceAll(/ /ig, '_')}.svg"/>${note.name}</td>
@@ -59,7 +73,7 @@ export function renderNotes() {
       <td>
         <div class="icon-row">
           <button id="${note.id}" class="icon-btn edit-note-btn"><img src="img/edit.svg" alt="edit"/></button>
-          <button id="${note.id}" class="icon-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
+          <button id="${note.id}" class="icon-btn archive-note-btn"><img src="img/grey_archive.svg" alt="archive"/></button>
           <button id="${note.id}" class="icon-btn"><img src="img/grey_delete.svg" alt="delete"/></button>
         </div>
       </td>`
