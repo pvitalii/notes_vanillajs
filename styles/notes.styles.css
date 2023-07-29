@@ -100,3 +100,17 @@
   background: none;
   border: none;
 }
+
+.note-table td {
+  white-space: nowrap;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archived-table td {
+  white-space: nowrap;
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
