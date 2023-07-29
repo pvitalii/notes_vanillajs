@@ -70,7 +70,7 @@ export class NotesService {
   }
 
   findNoteById(id) {
-    return this.#notes.find((note) => note.id === id);
+    return this.#notes.find((note) => note.id === +id);
   }
 
   addNote(note) {

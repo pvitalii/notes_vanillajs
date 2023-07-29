@@ -1,12 +1,10 @@
 import { dateParse } from "../common/date-parse.js";
-import { openEditModal } from "../common/modal.handlers.js";
 import { editNotesEvent } from "../events/edit-notes.event.js";
 import { NotesService } from "./notes.service.js";
 
-const notesService = new NotesService();
+export const notesService = new NotesService();
 
 const noteTable = document.querySelector('.note-table');
-const archivedTable = document.querySelector('.archived-table');
 const statTable = document.querySelector('.stat-table')
 
 export function submitNoteCreation(event) {
@@ -24,35 +22,6 @@ export function submitNoteCreation(event) {
   noteTable.dispatchEvent(editNotesEvent);
 }
 
-function addListenersOnNotes() {
-  const editNoteBtn = document.querySelectorAll('.edit-note-btn');
-  const archiveNoteBtn = document.querySelectorAll('.archive-note-btn');
-  const deleteNoteBtn = document.querySelectorAll('.delete-note-btn');
-  const editForm = document.querySelector('.edit-note-form');
-
-  editNoteBtn.forEach((editBtn) => {
-    editBtn.addEventListener('click', (event) => {
-      const id = +event.currentTarget.id;
-      openEditModal(notesService.findNoteById(id));
-      editForm.id = id;
-    });
-  })
-
-  archiveNoteBtn.forEach((archiveBtn) => {
-    archiveBtn.addEventListener('click', (event) => {
-      const noteId = +event.currentTarget.id;
-      archiveNote(notesService.findNoteById(noteId));
-    });
-  })
-
-  deleteNoteBtn.forEach((deleteBtn) => {
-    deleteBtn.addEventListener('click', (event) => {
-      const noteId = +event.currentTarget.id;
-      deleteNote(notesService.findNoteById(noteId));
-    })
-  })
-}
-
 export function submitNoteEdition(id, event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -66,21 +35,12 @@ export function submitNoteEdition(id, event) {
 
 export function archiveNote(note) {
   notesService.editNote(note.id, {archived: !note.archived});
-  if(note.archived) {
-    noteTable.dispatchEvent(editNotesEvent);
-    archivedTable.dispatchEvent(editNotesEvent);
-  } else {
-    noteTable.dispatchEvent(editNotesEvent);
-  }
+  noteTable.dispatchEvent(editNotesEvent);
 }
 
-export function deleteNote(note) {
-  notesService.deleteNote(note.id)
-  if(note.archived) {
-    archivedTable.dispatchEvent(editNotesEvent);
-  } else {
-    noteTable.dispatchEvent(editNotesEvent);
-  }
+export function deleteNote(id) {
+  notesService.deleteNote(id);
+  noteTable.dispatchEvent(editNotesEvent);
 }
 
 export function renderNotes(noteTable, isArchived) {
@@ -105,9 +65,6 @@ export function renderNotes(noteTable, isArchived) {
     return tableRow
   })
   noteTable.replaceChildren(tableHeader, ...rows);
-  if(noteTable.children.length > 1) {
-    addListenersOnNotes();
-  }
 }
 
 export function renderStat() {
